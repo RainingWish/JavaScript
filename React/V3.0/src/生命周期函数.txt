@@ -1,0 +1,45 @@
+定义：
+生命周期函数指在某一时刻组件会自动调用执行的函数
+例如render函数在state改变的时候会自动执行
+
+React 组件生命周期图：
+
+第一阶段：
+Initializtion: 创建
+初始化 and setup props and state
+
+第二阶段：
+Mounting: 挂载
+1.component Will Mount: 是一个生命周期函数
+                        在组件即将被挂载到页面的时刻自动执行
+2.Render: 把组件的内容render到页面上
+3.component Did Mount ： 在组件被挂载到页面之后被执行
+
+第三阶段：
+Updation:更新
+
+props变更：
+1.component Will Receive Props： 当一个组件从parent组件接受了参数
+                                 只要parent组件的rander函数被执行了
+                                 这个生命周期函数就会被执行
+                                 如果这个组件第一次存在于parent组件中，不会执行
+                                 如果这个组件之前已经存在于parent组件中，才会执行
+2.should component Update: 组件被更新之前被自动执行
+                           需要返回Boolan
+                           return true： 需要更新
+                           return false: 不需要更新
+3.component Will Update: 组件被更新之前会自动执行
+                         在should component Update之后执行
+                         在return true 之后才会执
+4.render:重新渲染虚拟DOM和DOM，完成更新
+5.component Did Update: 在组件更新完成之后被执行
+
+states变更:
+1.should component Update
+2.component Will Update
+3.render
+4.component Did Update
+
+第四阶段：
+Unmounting:卸载
+component Will Unmounting: 当这个组件将被从页面剔除的时候会被执行

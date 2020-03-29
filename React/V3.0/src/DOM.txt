@@ -1,0 +1,49 @@
+JS生成DOM的流程
+1. state 数据
+2. 模板
+3. 数据 + 模板结合，生成真实DOM，显示在前端
+4. state 发生改变
+5. 数据 + 模板结合，生成真实DOM， 替换原始DOM
+
+缺陷：
+第一次生成一个完整DOM
+第二次生成一个完整DOM
+第二次DOM替换第一次DOM，消耗性能
+
+JS生成DOM的优化
+1. state 数据
+2. 模板
+3. 数据 + 模板结合，生成真实DOM，显示在前端
+4. state 发生改变
+5. 数据 + 模板结合，生成真实DOM， 不替换替换原始DOM
+6. 新的DOM（Doucument Fragment）和原始的DOM对比找差异
+7. 找出input框发生了变化
+8. 只用新DOM的input元素替换老DOM的input
+
+缺点：
+提升没有太过于明显
+
+虚拟DOM
+1. state 数据
+2. 模板
+3. 数据 + 模板结合，生成真实DOM，显示在前端
+原有DOM：
+<div id='abc'><span>hello world</span></div>
+4. 生成一个虚拟DOM（虚拟DOM是一个JS对象，用它来描述真实DOM）表述真实DOM的结构 （JS生成JS代价小，JS生成DOM代价巨大）
+虚拟DOM：
+['div',{id:'abc'},['span', {}, 'hello world']]
+5. state 发生改变
+6. 数据 + 模板，生成一个新的虚拟DOM （这里极大提升，不用生成DOM）
+['div',{id:'abc'},['span', {}, 'Good by!']]
+7. 比较原始虚拟DOM和新的虚拟DOM，找到区别是span中的内容 （继续极大提升，不用对比DOM）
+Diff 算法， find diffrence between old imaginary DOM and new imaginary DOM
+这个Diff算法和Leetcode二叉树对比算法一样
+但是这里会应用key值做比对
+比对完成后index会和以前不一样，这也是为什么key值不要赋值成index
+key值要保持稳定
+栗子：
+原 a 0 b 1 c 2
+现 b 0 c 1
+现在b和c因为key值不一样无法关联
+
+8. 直接操作DOM，改变span中的内容

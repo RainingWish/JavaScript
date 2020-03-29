@@ -1,0 +1,20 @@
+Redux是一个数据层的框架
+
+Redux会让React吧数据都存放于store中
+
+                            Redux Flow
+
+            dispatch(action)         (preciousState,action)
+ Action   ------------------>  Store ----------------------> Reducers
+Creators                         |   <----------------------
+     ↖                   (State)|       (newState)
+       -------------------       ↓
+                          ↘   React 
+                             Components
+
+
+图书馆流程
+1：react Components: 借书的用户
+2：Action Creators: 用户向图书管理员说的：“我需要借哪一本书”这句话
+3：Store: 图书管理员
+4：Reducers: 书籍的借阅与地址情况（记录本）
